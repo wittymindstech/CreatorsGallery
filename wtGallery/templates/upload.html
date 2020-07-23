@@ -4,17 +4,36 @@
 
 
 {% block body %}
-<div class="container" style="margin-top:100px;">
-  <ul class="messages">
+<div class="container pb-5" style="margin-top:100px;">
+  <div class="card col-lg-8 col-md-8">
+    <ul class="messages">
       {% for message in messages %}
-      <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      <p {% if message.tags %} class="{{ message.tags }} alert alert-danger" role="alert"{% endif %}>{{ message }}</p>
       {% endfor %}
-  </ul>
-  <form method="post" enctype="multipart/form-data">
+    </ul>
+    <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form | crispy }}
-    <button type="submit" class="btn btn-primary">Upload</button>
+      <div class="form-group col-lg-8 col-md-8 mb-0">
+        {{ form.title|as_crispy_field }}
+      </div>
+      <div class="form-group col-lg-8 col-md-8 mb-0">
+          <div class="input-group mb-3 px-2 py-2 rounded-pill bg-white shadow-sm">
+                <input id="image" name="image" type="file" onchange="readURL(this);" class="form-control border-0">
+                <label id="image-label" name="image" for="image" class="font-weight-light text-muted">Choose file</label>
+                <div class="input-group-append">
+                    <label for="image" name="image" class="btn btn-light m-0 rounded-pill px-4"> <i class="fa fa-cloud-upload mr-2 text-muted"></i><small class="text-uppercase font-weight-bold text-muted">Choose file</small></label>
+                </div>
+            </div>
+
+            <!-- Uploaded image area-->
+            <p class="font-italic text-black text-center">The image uploaded will be rendered inside the box below.</p>
+            <div class="image-area mt-4 w-25"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+        </div>
+      <div class="form-group col-lg-6 col-md-6 mb-4">
+          <button type="submit" class="btn btn-primary">Upload</button>
+      </div>
   </form>
+  </div>
 </div>
 {% endblock body %}
 
