@@ -20,7 +20,7 @@
   <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
 
   <!-- Libraries CSS Files -->
-  <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <script src="https://kit.fontawesome.com/e2775e299c.js" crossorigin="anonymous"></script>
   <link href="{% static 'vendor/animate/animate.min.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
@@ -28,41 +28,39 @@
   <!-- Main Stylesheet File -->
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
   <style>
-    gallery-block.grid-gallery{
-      padding-bottom: 50px;
-      padding-top: 30px;
+    #image {
+    opacity: 0;
     }
 
-    .gallery-block.grid-gallery .heading{
-        margin-bottom: 40px;
-        text-align: center;
+    #image-label {
+        position: absolute;
+        top: 50%;
+        left: 1rem;
+        transform: translateY(-50%);
     }
 
-    .gallery-block.grid-gallery .heading h2{
+    .image-area {
+        border: 2px dashed rgba(255, 255, 255, 0.7);
+        padding: 1rem;
+        position: relative;
+    }
+
+    .image-area::before {
+        content: '';
+        color: #fff;
         font-weight: bold;
-        font-size: 1.4rem;
         text-transform: uppercase;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 0.8rem;
+        z-index: 1;
     }
 
-    .gallery-block.grid-gallery a:hover{
-      opacity: 0.8;
-    }
-
-    .gallery-block.grid-gallery .item img{
-      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.15);
-      transition: 0.4s;
-    }
-
-    .gallery-block.grid-gallery .item{
-      margin-bottom: 20px;
-    }
-
-    @media (min-width: 576px) {
-
-      .gallery-block.grid-gallery .scale-on-hover:hover{
-        transform: scale(1.05);
-        box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.15) !important;
-      }
+    .image-area img {
+        z-index: 2;
+        position: relative;
     }
   </style>
 </head>
@@ -131,7 +129,7 @@
           <div class="copyright-footer">
             <p class="copyright color-text-a">
               2020 &copy; Copyright
-              <span class="color-a">Team wittyMinds, </span> All Rights Reserved.
+              <span class="color-a">Team WittyMinds,</span> All Rights Reserved.
             </p>
           </div>
         </div>
@@ -164,6 +162,40 @@
 
   <!-- Template Main Javascript File -->
   <script src="{% static 'js/main.js' %}"></script>
+  <script>
+    /*  ==========================================
+        SHOW UPLOADED IMAGE
+    * ========================================== */
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#imageResult')
+                    .attr('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(function () {
+        $('#image').on('change', function () {
+            readURL(input);
+        });
+    });
+
+    /*  ==========================================
+        SHOW UPLOADED IMAGE NAME
+    * ========================================== */
+    var input = document.getElementById( 'image' );
+    var infoArea = document.getElementById( 'image-label' );
+
+    input.addEventListener( 'change', showFileName );
+    function showFileName( event ) {
+      var input = event.srcElement;
+      var fileName = input.files[0].name;
+      infoArea.textContent = 'File name: ' + fileName;
+    }
+  </script>
 </body>
 </html>

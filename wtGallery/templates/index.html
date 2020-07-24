@@ -5,18 +5,21 @@
 
 {% block body %}
 
-<section class="" style="margin-top:100px;">
+<section class="pb-5" style="margin-top:100px;">
         <div class="container">
-            <div class="row pb-3 mb-2 justify-content-center">
-                <h2 class="pr-3" style="">wtGallery</h2>
+            <div class="row">
+            {% for portfolio in portfolio %}
+                <div class="col-md-4">
+                    <div class="card mb-2">
+                        <img class="card-img-top img-fluid" src="{{ portfolio.image.url }}">
+                        <div class="card-body row d-flex justify-content-between">
+                            <h5 class="card-title pl-2">{{ portfolio.title }}</h5>
+                            <a class="btn btn-outline-danger" role="button" href="{{ portfolio.image.url }}" download>Download</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-<!--            <div class="row">-->
-<!--                <div class="col-md-6 col-lg-4 item">-->
-<!--                    <a class="lightbox" href="{% static 'img/image1.jpg' %}">-->
-<!--                        <img class="img-fluid image scale-on-hover" alt="image" src="{% static 'img/image1.jpg' %}">-->
-<!--                    </a>-->
-<!--                </div>-->
-<!--            </div>-->
         </div>
 </section>
 
