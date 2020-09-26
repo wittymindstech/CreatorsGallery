@@ -9,8 +9,8 @@
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Favicons -->
-  <link href="" rel="icon">
-  <link href="" rel="apple-touch-icon">
+  <link href="{% static 'favicon.png' %}" rel="icon">
+  <link href="{% static 'apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -24,48 +24,18 @@
   <link href="{% static 'vendor/animate/animate.min.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
   <link href="{% static 'vendor/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'vendor/fontawesome-pro/css/all.min.css' %}" rel="stylesheet" type="text/css">
 
   <!-- Main Stylesheet File -->
   <link href="{% static 'css/style.css' %}" rel="stylesheet">
-  <style>
-    #image {
-    opacity: 0;
-    }
 
-    #image-label {
-        position: absolute;
-        top: 50%;
-        left: 1rem;
-        transform: translateY(-50%);
-    }
+  {% block style %}
 
-    .image-area {
-        border: 2px dashed rgba(255, 255, 255, 0.7);
-        padding: 1rem;
-        position: relative;
-    }
-
-    .image-area::before {
-        content: '';
-        color: #fff;
-        font-weight: bold;
-        text-transform: uppercase;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        font-size: 0.8rem;
-        z-index: 1;
-    }
-
-    .image-area img {
-        z-index: 2;
-        position: relative;
-    }
-  </style>
+  {% endblock %}
 </head>
 
 <body>
+
   <!--/ Nav Star /-->
   <nav class="col-lg-12 col-md-12 col-sm-12 navbar navbar-default navbar-trans navbar-expand-lg fixed-top p-2">
     <div class="container">
@@ -79,7 +49,13 @@
       <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="btn btn-outline-primary" href="{% url 'upload' %}" role="button">Upload Image</a>
+            <a class="btn btn-success" href="{% url 'upload' %}" role="button">Upload</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary" href="{% url 'login' %}" role="button">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="btn btn-outline-primary" href="{% url 'register' %}" role="button">Join</a>
           </li>
         </ul>
       </div>
@@ -87,12 +63,14 @@
   </nav>
   <!--/ Nav End /-->
 
+<div class="container">
   {% block body %}
 
   {% endblock %}
 
   <!--/ footer Star /-->
 
+</div>
   <footer>
     <div class="container">
       <div class="row">
@@ -137,14 +115,8 @@
     </div>
   </footer>
   <!--/ Footer End /-->
-
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-<!--  <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>-->
-<!--  <script>-->
-<!--          baguetteBox.run('.grid-gallery', { animation: 'slideIn'});-->
-<!--  </script>-->
-  <!-- JavaScript Libraries -->
     <!-- Bootstrap core JavaScript-->
   <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
     <!-- Core plugin JavaScript-->
@@ -159,43 +131,10 @@
     <!-- Custom scripts for all pages-->
   <script src="{% static 'vendor/owlcarousel/owl.carousel.min.js' %}"></script>
   <script src="{% static 'vendor/scrollreveal/scrollreveal.min.js' %}"></script>
-
   <!-- Template Main Javascript File -->
   <script src="{% static 'js/main.js' %}"></script>
-  <script>
-    /*  ==========================================
-        SHOW UPLOADED IMAGE
-    * ========================================== */
-    function readURL(input) {
-        if (input.files && input.files[0]) {
-            var reader = new FileReader();
+  {% block script %}
 
-            reader.onload = function (e) {
-                $('#imageResult')
-                    .attr('src', e.target.result);
-            };
-            reader.readAsDataURL(input.files[0]);
-        }
-    }
-
-    $(function () {
-        $('#image').on('change', function () {
-            readURL(input);
-        });
-    });
-
-    /*  ==========================================
-        SHOW UPLOADED IMAGE NAME
-    * ========================================== */
-    var input = document.getElementById( 'image' );
-    var infoArea = document.getElementById( 'image-label' );
-
-    input.addEventListener( 'change', showFileName );
-    function showFileName( event ) {
-      var input = event.srcElement;
-      var fileName = input.files[0].name;
-      infoArea.textContent = 'File name: ' + fileName;
-    }
-  </script>
+  {% endblock %}
 </body>
 </html>

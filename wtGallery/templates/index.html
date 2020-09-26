@@ -1,31 +1,86 @@
 {% extends 'layout.html' %}
 {% load static %}
 {% block title %} Home {% endblock %}
+{% block style %}
+ <style>
+     /*
+    *
+    * ==========================================
+    * CUSTOM UTIL CLASSES
+    * ==========================================
+    *
+    */
 
+    .form-control:focus {
+      box-shadow: none;
+    }
 
+    .form-control-underlined {
+      border-width: 0;
+      border-bottom-width: 1px;
+      border-radius: 0;
+      padding-left: 0;
+    }
+
+    body {
+      background: #ffd89b;
+      background: -webkit-linear-gradient(to right, #ffd89b, #19547b);
+      background: linear-gradient(to right, #ffd89b, #19547b);
+      min-height: 100vh;
+    }
+
+    .form-control::placeholder {
+      font-size: 0.95rem;
+      color: #aaa;
+      font-style: italic;
+    }
+ </style>
+{% endblock %}
 {% block body %}
+<div style="margin-top:100px;">
+  <!-- For demo purpose -->
+  <div class="row py-5">
+    <div class="col-lg-12 mx-auto text-white text-center">
+      <h1 class="display-3">The best free stock photos shared by Gifted Creators.</h1>
+      <p class="lead mb-0">Collection of Large images for free use.</p></p>
+    </div>
+  </div>
+  <!-- End -->
+  <div class="row mb-5">
+    <div class="col-lg-12 mx-auto">
+      <div class="pl-5 pr-5 pb-5 rounded">
+        <!-- Custom rounded search bars with input group -->
+        <form action="{% url 'search_results' %}" method="get">
+          <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+            <div class="input-group">
+              <input name="q" type="search" placeholder="What're you searching for?" aria-describedby="button-addon1" class="form-control border-0 bg-light">
+              <div class="input-group-append">
+              <button id="button-addon1" type="submit" class="btn btn-link text-primary"><i class="fa fa-search"></i></button>
+              </div>
+            </div>
+          </div>
+        </form>
+        <!-- End -->
+      </div>
+    </div>
+  </div>
+</div>
 
-<section class="pb-5" style="margin-top:100px;">
-        <div class="container">
+<div class="pb-5">
+        <div>
             <div class="row">
             {% for portfolio in portfolio %}
-                <div class="col-md-4">
-                    <div class="card mb-2">
+                <div class="col-md-4 mb-5">
+                    <div class="card">
                         <img class="card-img-top img-fluid" src="{{ portfolio.image.url }}">
                         <div class="card-body row d-flex justify-content-between">
                             <h5 class="card-title pl-2">{{ portfolio.title }}</h5>
-                            <a class="btn btn-outline-danger" role="button" href="{{ portfolio.image.url }}" download>Download</a>
+                            <a class="" role="button" href="{{ portfolio.image.url }}" download><i class="fas fa-arrow-to-bottom pr-2" style="font-size: 1.5em;"></i></a>
                         </div>
                     </div>
                 </div>
-                {% endfor %}
+            {% endfor %}
             </div>
         </div>
-</section>
-
-
-
+</div>
 {% endblock body %}
-
-<!-- Specific Page JS goes HERE  -->
-{% block javascripts %}{% endblock javascripts %}

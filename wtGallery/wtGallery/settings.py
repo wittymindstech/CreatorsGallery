@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'storages',
     'crispy_forms',
     'wtpixel',
@@ -128,9 +129,16 @@ USE_TZ = True
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
 # )
-
+#
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+#Login Settings
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+
+# AWS Settings
 
 AWS_LOCATION = 'static'
 AWS_ACCESS_KEY_ID =''
@@ -150,4 +158,5 @@ ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
 STATICFILES_FINDERS = ('django.contrib.staticfiles.finders.FileSystemFinder', 'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 AWS_DEFAULT_ACL = None
+
 
