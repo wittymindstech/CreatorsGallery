@@ -35,6 +35,7 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model = Image
         fields = ('title', 'image')
+        
         def save(self):
             image = super(ImageForm, self).save()
             return image
