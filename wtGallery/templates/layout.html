@@ -1,33 +1,35 @@
 <!DOCTYPE html>
-{% load static %}
 <html lang="en">
+{% load static %}
 <head>
   <meta charset="utf-8">
   <meta name="robots" content="index, follow, archive" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>{% block title %} {% endblock %} | wtGallery</title>
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>{% block title %} {% endblock %} | wtGallery</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="{% static 'favicon.png' %}" rel="icon">
   <link href="{% static 'apple-touch-icon.png' %}" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
-  <!-- Bootstrap CSS File -->
-  <link href="{% static 'css/bootstrap 4 min.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/datatables/dataTables.bootstrap4.min.css' %}" rel="stylesheet">
+  <!-- Vendor CSS Files -->
 
-  <!-- Libraries CSS Files -->
-  <script src="https://kit.fontawesome.com/e2775e299c.js" crossorigin="anonymous"></script>
-  <link href="{% static 'vendor/animate/animate.min.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/ionicons/css/ionicons.min.css' %}" rel="stylesheet">
-  <link href="{% static 'vendor/fontawesome-pro/css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/icofont/icofont.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/venobox/venobox.css' %}" rel="stylesheet">
+  <link href="{% static 'assets/vendor/owl.carousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
 
-  <!-- Main Stylesheet File -->
-  <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  <!-- Template Main CSS File -->
+  <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
 
   {% block style %}
 
@@ -36,105 +38,123 @@
 
 <body>
 
-  <!--/ Nav Star /-->
-  <nav class="col-lg-12 col-md-12 col-sm-12 navbar navbar-default navbar-trans navbar-expand-lg fixed-top p-2">
-    <div class="container">
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
-        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <a class="navbar-brand text-brand" href="{% url 'index' %}">wt<span class="color-b">Gallery</span></a>
-      <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="btn btn-success" href="{% url 'upload' %}" role="button">Upload</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-primary" href="{% url 'login' %}" role="button">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="btn btn-outline-primary" href="{% url 'register' %}" role="button">Join</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <!--/ Nav End /-->
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center">
 
-<div class="container">
+      <h1 class="logo"><a href="{% url 'index' %}">WTGallery</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <!-- .nav-menu -->
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="drop-down" {% if request.path != '/' %} style="display: none;" {% endif %}><a href="#">Other Services</a>
+            <ul>
+              <li><a href="about.html">Login</a></li>
+              <li><a href="team.html">Register</a></li>
+              <li><a href="testimonials.html">wtAPI</a></li>
+            </ul>
+          </li>
+          <li><a href="services.html">Images</a></li>
+          <li><a href="contact.html">Videos</a></li>
+        </ul>
+      </nav>
+
+      <a href="{% url 'upload' %}" class="get-started-btn ml-auto" {% if request.path != '/' %} style="display: none;" {% endif %}>Upload</a>
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Section ======= -->
   {% block body %}
 
   {% endblock %}
 
-  <!--/ footer Star /-->
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="footer-top">
+      <div class="container">
+        <div class="row">
 
-</div>
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <nav class="nav-footer">
-            <ul class="list-inline">
-              <li class="list-inline-item">
-                <a href="{% url 'index' %}">Home</a>
-              </li>
-              <li class="list-inline-item">
-                <a href="{% url 'upload' %}">Upload</a>
-              </li>
-            </ul>
-          </nav>
-          <div class="socials-a">
-            <ul class="list-inline">
-              <li class="list-inline-item">
-                <a href="">
-                  <i class="fa fa-facebook" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-twitter" aria-hidden="true"></i>
-                </a>
-              </li>
-              <li class="list-inline-item">
-                <a href="#">
-                  <i class="fa fa-instagram" aria-hidden="true"></i>
-                </a>
-              </li>
+          <div class="col-lg-3 col-md-6">
+            <div class="footer-info">
+              <h3>WTGallery</h3>
+              <p>
+                Dolpin Connects, Near Ramamurthy Nagar Signal, <br>
+                Bengaluru, India 560043<br><br>
+                <strong>Phone:</strong> +91 9535594891<br>
+                <strong>Email:</strong> info@wittymindstech.com<br>
+              </p>
+              <div class="social-links mt-3">
+                <a href="https://twitter.com/wittymindstech1" class="twitter"><i class="bx bxl-twitter"></i></a>
+                <a href="https://www.instagram.com/wittymindstech/" class="instagram"><i class="bx bxl-instagram"></i></a>
+                <a href="https://github.com/wittymindstech" class="github"><i class="bx bxl-github"></i></a>
+                <a href="https://www.youtube.com/channel/UCh54sXW9OwZFvHScesnEE0g" class="google-plus"><i class="bx bxl-youtube"></i></a>
+                <a href="https://in.linkedin.com/in/wittymindstech" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-6 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Home</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">About us</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Services</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Terms of service</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Privacy policy</a></li>
             </ul>
           </div>
-          <div class="copyright-footer">
-            <p class="copyright color-text-a">
-              2020 &copy; Copyright
-              <span class="color-a">Team WittyMinds,</span> All Rights Reserved.
-            </p>
+
+          <div class="col-lg-3 col-md-6 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Design</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Web Development</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Product Management</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Marketing</a></li>
+              <li><i class="bx bx-chevron-right"></i> <a href="#">Graphic Design</a></li>
+            </ul>
           </div>
+
+          <div class="col-lg-4 col-md-6 footer-newsletter">
+            <h4>Our Newsletter</h4>
+            <p>Get in touch with us !!</p>
+
+            <form action="" method="post">
+              <input type="email" name="email"><input type="submit" value="Subscribe">
+            </form>
+
+          </div>
+
         </div>
       </div>
     </div>
-  </footer>
-  <!--/ Footer End /-->
-  <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
 
-    <!-- Bootstrap core JavaScript-->
-  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <!-- Core plugin JavaScript-->
-  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-    <!-- Core plugin JavaScript-->
-  <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
-    <!-- Page level plugins -->
-  <script src="{% static 'vendor/datatables/jquery.dataTables.min.js' %}"></script>
-  <script src="{% static 'vendor/datatables/dataTables.bootstrap4.min.js' %}"></script>
-    <!-- Page level custom scripts -->
-  <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-    <!-- Custom scripts for all pages-->
-  <script src="{% static 'vendor/owlcarousel/owl.carousel.min.js' %}"></script>
-  <script src="{% static 'vendor/scrollreveal/scrollreveal.min.js' %}"></script>
-  <!-- Template Main Javascript File -->
-  <script src="{% static 'js/main.js' %}"></script>
-  {% block script %}
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>wiTTyMinds</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        Designed by <a href="https://wittymindstech.com/">wiTTyMinds Technology</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
 
-  {% endblock %}
+  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/jquery.easing/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/venobox/venobox.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/waypoints/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'assets/vendor/owl.carousel/owl.carousel.min.js' %}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{% static 'assets/js/main.js' %}"></script>
+
 </body>
+
 </html>
