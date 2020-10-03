@@ -30,3 +30,6 @@ Run some command for running the Project:
 
 ![](upload_photo.PNG)
 
+
+![](images_dashboard.PNG)
+
