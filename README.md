@@ -26,3 +26,5 @@ Run some command for running the Project:
 
 ```
 
+![dashboard.PNG]
+
