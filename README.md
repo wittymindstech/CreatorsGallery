@@ -28,3 +28,5 @@ Run some command for running the Project:
 
 ![](dashboard.PNG)
 
+![](upload_photo.PNG)
+
