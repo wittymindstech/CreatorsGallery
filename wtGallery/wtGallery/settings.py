@@ -41,8 +41,16 @@ INSTALLED_APPS = [
     'storages',
     'crispy_forms',
     'wtpixel',
+    'django_elasticsearch_dsl',
 ]
+
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+ELASTICSEARCH_DSL = {
+    'default': {
+        'hosts': 'elasticsearch:9200'
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -137,6 +145,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
+
+LOGOUT_REDIRECT_URL = '/'
 
 # AWS Settings
 #

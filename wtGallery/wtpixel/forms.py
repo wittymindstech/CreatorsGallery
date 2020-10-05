@@ -3,21 +3,23 @@ from django.contrib.auth.forms import UserCreationForm
 from wtpixel.models import Image
 from django.contrib.auth.models import User
 
+
 class LoginForm(forms.Form):
     username = forms.CharField(
         widget=forms.TextInput(
             attrs={
-                "placeholder" : "Username",
+                "placeholder": "Username",
                 "class": "form-control"
             }
         ))
     password1 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
-                "placeholder" : "Password",
+                "placeholder": "Password",
                 "class": "form-control"
             }
         ))
+
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=True)
