@@ -42,26 +42,34 @@
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center">
 
-      <h1 class="logo"><a href="{% url 'index' %}">WTGallery</a></h1>
+      <h1 class="logo"><a href="{% url 'index' %}">WT<span style="color:#d9232d">Gallery</span></a></h1>
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
 
       <!-- .nav-menu -->
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="drop-down" {% if request.path != '/' %} style="display: none;" {% endif %}><a href="#">Other Services</a>
-            <ul>
-              <li><a href="about.html">Login</a></li>
-              <li><a href="team.html">Register</a></li>
-              <li><a href="testimonials.html">wtAPI</a></li>
-            </ul>
-          </li>
           <li><a href="services.html">Images</a></li>
           <li><a href="contact.html">Videos</a></li>
         </ul>
       </nav>
 
       <a href="{% url 'upload' %}" class="get-started-btn ml-auto" {% if request.path != '/' %} style="display: none;" {% endif %}>Upload</a>
+
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li class="drop-down" {% if request.path != '/' or request.user.is_authenticated %} style="display: none;" {% endif %}><a href="#">Other Services</a>
+            <ul>
+              <li><a href="{% url 'login' %}">Login</a></li>
+              <li><a href="{% url 'register' %}">Register</a></li>
+              <li><a href="#">wtAPI</a></li>
+            </ul>
+          </li>
+          {% if request.user.is_authenticated %}
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+          {% endif %}
+        </ul>
+      </nav>
     </div>
   </header><!-- End Header -->
 
