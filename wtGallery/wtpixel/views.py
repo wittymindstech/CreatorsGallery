@@ -11,7 +11,6 @@ from wtpixel.forms import ImageForm, SignUpForm, LoginForm
 from django.contrib import messages
 from wtpixel.models import Image
 import pyrebase
-from .documents import ImageDocument
 
 config = {
     'apiKey': "AIzaSyDaJEJ9ZM1lvMYUWEfBORtDKQwnQ822kl0",
@@ -90,15 +89,6 @@ class SearchResultsView(ListView):
         query = self.request.GET.get('q')
         object_list = Image.objects.filter(Q(title__icontains=query) | Q(image__icontains=query))
         return object_list
-
-# def search(request):
-#     q = request.GET.get('q')
-#     if q:
-#         image = ImageDocument.search().query("match", title=q)
-#     else:
-#         image = ''
-#
-#     return render(request, 'search.html', {'image': image})
 
 
 @login_required(login_url="/login/")

@@ -41,16 +41,9 @@ INSTALLED_APPS = [
     'storages',
     'crispy_forms',
     'wtpixel',
-    'django_elasticsearch_dsl',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
-
-ELASTICSEARCH_DSL = {
-    'default': {
-        'hosts': 'elasticsearch:9200'
-    },
-}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
