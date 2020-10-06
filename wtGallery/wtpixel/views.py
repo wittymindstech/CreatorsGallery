@@ -1,16 +1,21 @@
 # Create your views here.
+
+import json
 from django import template
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import loader
 from django.views.generic import ListView
 from wtpixel.forms import ImageForm, SignUpForm, LoginForm
 from django.contrib import messages
 from wtpixel.models import Image
 import pyrebase
+import nude
+from django.contrib.auth import get_user_model
+
 
 config = {
     'apiKey': "AIzaSyDaJEJ9ZM1lvMYUWEfBORtDKQwnQ822kl0",
@@ -30,7 +35,10 @@ auth = firebase.auth()
 
 def index(request):
     portfolio = Image.objects.all()
-    context = {"portfolio": portfolio}
+
+    all_users = get_user_model().objects.all()
+
+    context = {"portfolio": portfolio, 'allusers': all_users}
     return render(request, "index.html", context)
 
 
@@ -71,9 +79,15 @@ def login_view(request):
 def upload(request):
     if request.method == 'POST':
         form = ImageForm(request.POST, request.FILES)
+
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Image inserted successfully.')
+
+            if nude.is_nude(request.FILES['image']):
+                messages.warning(request, 'Nude content detected, This is against our company policy !!')
+            else:
+                form.save()
+                messages.success(request, 'Image inserted successfully.')
+
             return redirect('upload')
     else:
         form = ImageForm()

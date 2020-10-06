@@ -79,13 +79,19 @@
               <img src="{{ portfolio.image.url }}" class="img-fluid" alt="">
               <div class="portfolio-info">
                 <h4>{{ portfolio.title }}</h4>
+
+                {% for user in allusers %}
+                <p style="font-size: 11px">Uploaded by {{user.get_full_name}} </p>
+                {% endfor %}
+
                 <div class="portfolio-links">
-                  <a href="{{ portfolio.image.url }}" data-gall="portfolioGallery" class="venobox" title="{{ portfolio.title }}">
+                  <a href="{{ portfolio.image.url }}" data-gall="portfolioGallery" class="venobox" title="View Image">
                     <i class="bx bx-show-alt"></i>
                   </a>
-                  <a href="{{ portfolio.image.url }}" title="{{ portfolio.title }}" download>
+                  <a href="{{ portfolio.image.url }}" title="Download" download>
                     <i class='bx bxs-download pl-2'></i>
                   </a>
+
                 </div>
               </div>
             </div>
@@ -97,5 +103,13 @@
     </section><!-- End Portfolio Section -->
 
   </main><!-- End #main -->
+
+{% block script %}
+
+<script>
+
+</script>
+
+{% endblock script %}
 
 {% endblock body %}
