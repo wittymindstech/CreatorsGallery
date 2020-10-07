@@ -6,39 +6,18 @@ from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect
 from django.template import loader
 from django.views.generic import ListView
 from wtpixel.forms import ImageForm, SignUpForm, LoginForm
 from django.contrib import messages
 from wtpixel.models import Image
-import pyrebase
 import nude
-from django.contrib.auth import get_user_model
-
-
-config = {
-    'apiKey': "AIzaSyDaJEJ9ZM1lvMYUWEfBORtDKQwnQ822kl0",
-    'authDomain': "wtgallery-f7b39.firebaseapp.com",
-    'databaseURL': "https://wtgallery-f7b39.firebaseio.com",
-    'projectId': "wtgallery-f7b39",
-    'storageBucket': "wtgallery-f7b39.appspot.com",
-    'messagingSenderId': "614208620267",
-    'appId': "1:614208620267:web:69be8e488eeb0c7ae4a0ae",
-    'measurementId': "G-TXRPVZFW7M"
-}
-
-firebase = pyrebase.initialize_app(config)
-
-auth = firebase.auth()
 
 
 def index(request):
     portfolio = Image.objects.all()
-
-    all_users = get_user_model().objects.all()
-
-    context = {"portfolio": portfolio, 'allusers': all_users}
+    context = {"portfolio": portfolio}
     return render(request, "index.html", context)
 
 
@@ -64,12 +43,15 @@ def login_view(request):
         if form.is_valid():
             username = form.cleaned_data.get("username")
             password = form.cleaned_data.get("password1")
+
             user = authenticate(username=username, password=password)
+
             if user is not None:
                 login(request, user)
                 return redirect("/")
             else:
                 msg = "Username or Password Doesn't match"
+
         else:
             msg = 'Error validating the form'
     return render(request, "login.html", {"form": form, "msg": msg})
@@ -85,7 +67,10 @@ def upload(request):
             if nude.is_nude(request.FILES['image']):
                 messages.warning(request, 'Nude content detected, This is against our company policy !!')
             else:
-                form.save()
+                # form.save()
+                fs = form.save(commit=False)
+                fs.user = request.user
+                fs.save()
                 messages.success(request, 'Image inserted successfully.')
 
             return redirect('upload')

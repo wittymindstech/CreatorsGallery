@@ -57,7 +57,7 @@
                         {% endfor %}
                     </div>
                     <div class="d-flex justify-content-center">
-                        <form class="mt-4" method="post" enctype="multipart/form-data">
+                        <form class="mt-4" method="post" onsubmit="if(document.getElementById('agree').checked) { return true; } else { alert('Please indicate that you have read and agree to the Terms and Conditions and Privacy Policy'); return false; }" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="form-group col-lg-12 col-md-12 mb-0">
                                 {{ form.title|as_crispy_field }}
@@ -74,6 +74,9 @@
                                 <!-- Uploaded image area-->
                                 <p class="font-italic text-black text-center">The image uploaded will be rendered inside the box below.</p>
                                 <div class="image-area mt-4 w-50 mb-2"><img id="imageResult" src="#" alt="" class="img-fluid rounded shadow-sm mx-auto d-block"></div>
+                            </div>
+                            <div class="form-group col-lg-12 col-md-12 mb-0">
+                                <input type="checkbox" name="checkbox" value="check" id="agree"/> I have read and agree to the Terms and Conditions and Privacy Policy
                             </div>
                             <div class="form-group mb-4">
                                 <button type="submit" class="col-lg-12 col-md-12 btn btn-primary">Upload</button>

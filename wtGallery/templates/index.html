@@ -80,9 +80,7 @@
               <div class="portfolio-info">
                 <h4>{{ portfolio.title }}</h4>
 
-                {% for user in allusers %}
-                <p style="font-size: 11px">Uploaded by {{user.get_full_name}} </p>
-                {% endfor %}
+                <p style="font-size: 11px">Uploaded by {{portfolio.user}} </p>
 
                 <div class="portfolio-links">
                   <a href="{{ portfolio.image.url }}" data-gall="portfolioGallery" class="venobox" title="View Image">
@@ -90,6 +88,9 @@
                   </a>
                   <a href="{{ portfolio.image.url }}" title="Download" download>
                     <i class='bx bxs-download pl-2'></i>
+                  </a>
+                  <a href="#" title="Hire Me" download>
+                    <button type="button" class="btn btn-danger btn-sm">Hire Me</button>
                   </a>
 
                 </div>
