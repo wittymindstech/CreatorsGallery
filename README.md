@@ -22,10 +22,19 @@ Run some command for running the Project:
 
 ```
 ```
-3. python maage.py runserver
+3. python manage.py runserver
 
 ```
 
+
+# To create user 
+
+`python manage.py createsuperuser`
+
+
+# To install nudepy
+
+`pip install nudepy`
 ![](dashboard.PNG)
 
 ![](upload_photo.PNG)
