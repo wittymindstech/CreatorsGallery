@@ -12,6 +12,14 @@ class LoginForm(forms.Form):
                 "class": "form-control"
             }
         ))
+    # email = forms.CharField(
+    #     widget=forms.EmailInput(
+    #         attrs={
+    #             "placeholder": "Email",
+    #             "class": "form-control"
+    #         }
+    #     ))
+
     password1 = forms.CharField(
         widget=forms.PasswordInput(
             attrs={
