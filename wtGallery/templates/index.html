@@ -3,6 +3,10 @@
 {% block title %} Home {% endblock %}
 {% block style %}
 <style>
+.custom-button {
+  font-size:0.5em;
+  padding:2px;
+}
   /* Rounded pill classes for horizontal sides */
   .rounded-pill-left {
     border-top-left-radius: 50rem !important;
@@ -89,8 +93,8 @@
                   <a href="{{ portfolio.image.url }}" title="Download" download>
                     <i class='bx bxs-download pl-2'></i>
                   </a>
-                  <a href="#" title="Hire Me" download>
-                    <button type="button" class="btn btn-danger btn-sm">Hire Me</button>
+                  <a href="#" title="Hire Me">
+                    <button type="button" class="float- custom-button btn-danger btn-sm">Hire Me</button>
                   </a>
 
                 </div>

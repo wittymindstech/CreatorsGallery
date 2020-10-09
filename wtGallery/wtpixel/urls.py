@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, re_path
 from . import views
 from django.contrib.auth import views as auth
 from django.conf import settings
@@ -10,11 +10,10 @@ urlpatterns = [
     path('upload/', views.upload, name='upload'),
     path('login/', views.login_view, name='login'),
     path('logout/', LogoutView.as_view(), {'next_page': settings.LOGOUT_REDIRECT_URL}, name='logout'),
-    # path('logout/', views.logout, name='logout'),
     path('register/', views.register, name='register'),
     path('search/', views.SearchResultsView.as_view(), name='search'),
-    # path('search/', views.search, name='search'),
+    re_path(r'^.*\.html', views.pages, name='pages'),
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
