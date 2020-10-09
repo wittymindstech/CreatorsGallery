@@ -24,6 +24,11 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
     pip install -r requirements.txt
     ```
 
+```
+```
+3. python manage.py runserver
+
+
 3. Run some command for running the Project:
 
     ```
@@ -48,3 +53,21 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
 - Upload Image and Video page 
 
 ![](sample/upload.png)
+=======
+
+# To create user 
+
+`python manage.py createsuperuser`
+
+
+# To install nudepy
+
+`pip install nudepy`
+
+![](dashboard.PNG)
+
+![](upload_photo.PNG)
+
+
+![](images_dashboard.PNG)
+
