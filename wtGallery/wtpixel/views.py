@@ -65,7 +65,7 @@ def upload(request):
         if form.is_valid():
 
             if nude.is_nude(request.FILES['image']):
-                messages.warning(request, 'Nude content detected, This is against our company policy !!')
+                messages.warning(request, 'Inappropriate image detected, This is against our company policy !!')
             else:
                 # form.save()
                 fs = form.save(commit=False)

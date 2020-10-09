@@ -18,90 +18,68 @@
     <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
 </head>
 
-<body class="" style="background-color:#d6d4ce;">
-
-  <div class="container">
+<body class="" style="background-image: url({% static 'assets/img/auth-back.jpg' %})">
+    <div class="container">
     <!-- Outer Row -->
-    <div class="row justify-content-center">
-      <div class="col-xl-8 col-lg-10 col-md-9 m-4">
-        <div class="card o-hidden border-0 shadow-lg my-5">
-          <div class="card-body p-0">
-            <div class="row">
-              <div class="col-lg-10 m-auto">
-                <div class="p-5">
-                  <div class="text-center">
-                    <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                  </div>
-                  <form role="form" method="post" action="">
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10 col-md-9 m-4">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-lg-10 m-auto">
+                                <div class="p-5">
+                                    <div class="text-center">
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                    </div>
+                                    <form role="form" method="post" action="">
 
-                {% csrf_token %}
+                                        {% csrf_token %}
 
-                <div class="card-header">
-                  <h5 class="title">Login</h5>
+                                        <div class="card-header">
+                                            <h5 class="title">Login</h5>
 
-                  <h6 class="card-category">
-                      {% if msg %}
-                        <span class="text-danger">{{ msg }}</span>
-                      {% else %}
-                        Use default credentials: admin / redhat123
-                      {% endif %}
-                  </h6>
-                </div>
-
-                <div class="card-body">
-
-                    <div class="row">
-
-                      <div class="col-md-12 px-md-1">
-                        <div class="form-group">
-                          <label>Username</label>
-                          {{ form.username }}
+                                            <h6 class="card-category">
+                                                {% if msg %}
+                                                    <span class="text-danger">{{ msg }}</span>
+                                                {% else %}
+                                                    Use your Credentials
+                                                {% endif %}
+                                            </h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row">
+                                                <div class="col-md-12 px-md-1">
+                                                    <div class="form-group">
+                                                        <label>Username</label>
+                                                            {{ form.username }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12 px-md-1">
+                                                    <div class="form-group">
+                                                        <label>Password</label>
+                                                            {{ form.password1 }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer">
+                                            <button type="submit" name="login" class="btn btn-fill btn-primary">Login</button>
+                                                &nbsp; &nbsp;
+                                                Don't have an account? <a href="{% url 'register' %}" class="text-primary">Create Account</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                      </div>
-
                     </div>
-
-<!--                    <div class="row">-->
-
-<!--                      <div class="col-md-12 px-md-1">-->
-<!--                        <div class="form-group">-->
-<!--                          <label>Email</label>-->
-<!--                          {{ form.email }}-->
-<!--                        </div>-->
-<!--                      </div>-->
-
-<!--                    </div>-->
-
-                    <div class="row">
-
-                      <div class="col-md-12 px-md-1">
-                        <div class="form-group">
-                          <label>Password</label>
-                          {{ form.password1 }}
-                        </div>
-                      </div>
-
-                    </div>
-
-                </div>
-                <div class="card-footer">
-                  <button type="submit" name="login" class="btn btn-fill btn-primary">Login</button>
-                  &nbsp; &nbsp;
-                  Don't have an account? <a href="{% url 'register' %}" class="text-primary">Create Account</a>
                 </div>
 
-              </form>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-
-      </div>
-
+        <a href="{% url 'index' %}" class="justify-content-center d-flex">Home</a>
     </div>
-
-  </div>
   <!-- Bootstrap core JavaScript-->
   <script src="{% static 'assets/vendor/jquery/jquery.min.js' %}"></script>
   <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
