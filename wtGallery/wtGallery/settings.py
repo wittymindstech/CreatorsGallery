@@ -134,7 +134,7 @@ USE_TZ = True
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Login Settings
+#Login Settings
 
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
@@ -144,14 +144,14 @@ LOGOUT_REDIRECT_URL = '/'
 # AWS Settings
 
 AWS_LOCATION = 'static'
-AWS_ACCESS_KEY_ID =''   # Your own Access ID
-AWS_SECRET_ACCESS_KEY = ''  # Your own Access Key
-AWS_STORAGE_BUCKET_NAME ='' # Enter your Bucket name
+AWS_ACCESS_KEY_ID ='AKIAW5UZ5LKCN4GJHYN6'
+AWS_SECRET_ACCESS_KEY = 'BCoXqeZUFT4TtVZBAB7tLQ4WBzChu1wu4W+sVgs5'
+AWS_STORAGE_BUCKET_NAME ='wtgallery'
 AWS_S3_CUSTOM_DOMAIN='%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
 AWS_S3_OBJECT_PARAMETERS = {
      'CacheControl': 'max-age=86400',
 }
-DEFAULT_FILE_STORAGE = 'wtGallery.storage_backends.MediaStorage'   # Replace wtGallery with your Bucket name
+DEFAULT_FILE_STORAGE = 'wtGallery.storage_backends.MediaStorage'
 STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
