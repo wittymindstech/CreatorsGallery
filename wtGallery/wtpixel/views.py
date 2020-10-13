@@ -1,6 +1,8 @@
 # Create your views here.
 
 import json
+import os
+
 from django import template
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
@@ -9,7 +11,7 @@ from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.template import loader
 from django.views.generic import ListView
-from wtpixel.forms import ImageForm, SignUpForm, LoginForm
+from wtpixel.forms import ImageForm, SignUpForm, LoginForm, VideoForm
 from django.contrib import messages
 from wtpixel.models import Image
 import nude
@@ -60,22 +62,60 @@ def login_view(request):
 @login_required(login_url="/login/")
 def upload(request):
     if request.method == 'POST':
-        form = ImageForm(request.POST, request.FILES)
+        image = ImageForm(request.POST, request.FILES)
+        video = VideoForm(request.POST, request.FILES)
 
-        if form.is_valid():
+        # Split the extension from the path and normalise it to lowercase.
+        ext = os.path.splitext(str(request.FILES['file']))[-1].lower()
+        print(ext)
 
-            if nude.is_nude(request.FILES['image']):
-                messages.warning(request, 'Inappropriate image detected, This is against our company policy !!')
-            else:
+        # Now we can simply use == to check for equality, no need for wildcards.
+
+        if ext == ".mp4":
+            print("mp4!")
+
+            if video.is_valid:
                 # form.save()
-                fs = form.save(commit=False)
+                fs = video.save(commit=False)
                 fs.user = request.user
                 fs.save()
-                messages.success(request, 'Image inserted successfully.')
+                messages.success(request, 'Video inserted successfully.')
 
-            return redirect('upload')
+                return redirect('upload')
+
+        elif ext == ".png" or ".jpg" or ".jpeg":
+            print("image file!")
+
+            if image.is_valid():
+                if nude.is_nude(request.FILES['file']):
+                    messages.warning(request, 'Inappropriate image detected, This is against our company policy !!')
+                else:
+                    # form.save()
+                    fs = image.save(commit=False)
+                    fs.user = request.user
+                    fs.save()
+                    messages.success(request, 'Image inserted successfully.')
+
+                return redirect('upload')
+
+        else:
+            print("Unknown file format.")
+            messages.warning(request, 'Unknown file format !!')
+
+        # if image.is_valid() or video.is_valid:
+        #
+        #     if nude.is_nude(request.FILES['image']):
+        #         messages.warning(request, 'Inappropriate image detected, This is against our company policy !!')
+        #     else:
+        #         # form.save()
+        #         fs = image.save(commit=False)
+        #         fs.user = request.user
+        #         fs.save()
+        #         messages.success(request, 'Image inserted successfully.')
+        #
+        #     return redirect('upload')
     else:
-        form = ImageForm()
+        form = ImageForm() or VideoForm()
     return render(request, 'upload.html', {'form': form})
 
 
