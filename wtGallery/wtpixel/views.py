@@ -2,7 +2,6 @@
 
 import json
 import os
-
 from django import template
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate
@@ -13,7 +12,7 @@ from django.template import loader
 from django.views.generic import ListView
 from wtpixel.forms import ImageForm, SignUpForm, LoginForm, VideoForm
 from django.contrib import messages
-from wtpixel.models import Image
+from wtpixel.models import Image, Video
 import nude
 
 
@@ -21,6 +20,12 @@ def index(request):
     portfolio = Image.objects.all()
     context = {"portfolio": portfolio}
     return render(request, "index.html", context)
+
+
+def video(request):
+    portfolio = Video.objects.all()
+    context = {"portfolio": portfolio}
+    return render(request, "video.html", context)
 
 
 def register(request):
