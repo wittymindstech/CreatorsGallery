@@ -64,7 +64,7 @@
 
       <nav class="nav-menu d-flex justify-content-end d-lg-block">
         <ul>
-          <li {% if request.path != '/video/' %} style="display: none;" {% endif %}><a href="{% url 'image' %}">Image</a></li>
+          <li {% if request.path != '/video/' and request.path != '/music/' %} style="display: none;" {% endif %}><a href="{% url 'image' %}">Image</a></li>
           <li {% if request.path != '/' and request.path != '/image/' and request.path != '/music/' %} style="display: none;" {% endif %}><a href="{% url 'video' %}">Video</a></li>
           <li {% if request.path != '/' and request.path != '/image/' and request.path != '/video/' %} style="display: none;" {% endif %}><a href="{% url 'music' %}">Music</a></li> 
          <li class="drop-down" {% if request.path != '/' and request.path != '/video/' and request.path != '/image/' or request.user.is_authenticated %} style="display: none;" {% endif %}><a href="#">Other Services</a>
