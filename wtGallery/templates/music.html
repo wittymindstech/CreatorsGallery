@@ -21,12 +21,13 @@
           {% for portfolio in portfolio %}
 
           <div class="col-lg-4 col-md-6 portfolio-item">
-	      <audio controls>
-                <source src="{{ portfolio.file.url }}" type="audio/mp3">
+              <audio id="player" style="margin-top:10px;margin-bottom:10px"  controls  download> 
+                 <source src="{{ portfolio.file.url }}" name="{portfolio.file.name}}" type="audio/mp3" download="{portfolio.file.name}}">
               </audio>
               <div class="mx-auto my-1 col-lg-12 d-block" style="font-size: 10px;">
                 <p class="float-left">
                   <span class="font-weight-bold">Uploaded by:</span> <a href="{% url 'profile' username=portfolio.user.username %}">{{portfolio.user}}</a>
+                  <span class="font-weight-bold">Audio:</span> <a href="{% url 'profile' username=portfolio.title %}">{{portfolio.title}}</a>
                 </p>
                 <p class="float-right">
                   <span class="font-weight-bold">Views:</span> 2
@@ -46,4 +47,4 @@
 
 {% endblock script %}
 
-{% endblock boX²uqÎY
+{% endblock body %}
