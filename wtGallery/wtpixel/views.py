@@ -16,7 +16,7 @@ from django.views.generic.base import View
 from wtpixel.forms import ImageForm, SignUpForm, LoginForm, VideoForm, MusicForm
 from django.contrib import messages
 from wtpixel.models import Image, Video, Music
-import nude
+# import nude
 
 
 # def index(request):
@@ -55,8 +55,21 @@ def music(request):
     print(portfolio)
     context = {"portfolio": portfolio}
     return render(request, "music.html", context)
+def AllImages(req):
+    portfolio = Image.objects.all()
+    context = {"portfolio": portfolio}
+    return render(req, "AllImages.html", context)
+def AllMusic(req):
+    portfolio = Music.objects.all()
+    print(portfolio)
+    context = {"portfolio": portfolio}
+    return render(req, "AllMusic.html", context)
 
 
+def AllVideos(req):
+    portfolio = Video.objects.all()
+    context = {"portfolio": portfolio}
+    return render(req, "Allvideo.html", context)
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -189,7 +202,8 @@ class SearchResultsView(ListView):
         print(object_list)
         return object_list
 
-
+def hire_me(req):
+    return render(req,'hireme.html')
 @login_required(login_url="/login/")
 def pages(request):
     context = {}

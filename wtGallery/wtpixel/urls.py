@@ -19,7 +19,11 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('search/', views.SearchResultsView.as_view(), name='search'),
     re_path(r'^.*\.html', views.pages, name='pages'),
+    path('AllVideos/',views.AllVideos,name='AllVideos'),
+    path('AllImages/', views.AllImages, name='AllImages'),
+    path('AllMusics/', views.AllMusic, name='AllMusics'),
+    path('hireme/',views.hire_me,name='hireme'),
 ]
 
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

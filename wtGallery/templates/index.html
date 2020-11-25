@@ -56,8 +56,11 @@
                 <div class="input-group-prepend">
                     <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Image</button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" name="v">Video</a>
-                      <a class="dropdown-item" name="m">Music</a>
+                      <a class="dropdown-item" href="{% url 'AllVideos' %}" name="v">Video</a>
+                      <a class="dropdown-item" href="{% url 'AllMusics' %}" name="m">Music</a>
+                      <a class="dropdown-item" name="i" href="{% url 'AllImages' %}">Images</a>
+
+
 
                     </div>
                 </div>
