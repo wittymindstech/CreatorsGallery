@@ -42,8 +42,8 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
 
 - Home
 
-![](sample/Home.png)
+![](sample/Home.PNG)
 
 - Upload Image and Video page 
 
-![](sample/Upload.png)
+![](sample/Upload.PNG)
