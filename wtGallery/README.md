@@ -32,7 +32,7 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
     2. python manage.py migrate
     ```
     ```
-    3. python maage.py runserver
+    3. python manage.py runserver
     ```
 
 

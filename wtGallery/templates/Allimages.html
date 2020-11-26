@@ -13,7 +13,7 @@
       <div class="container">
 
         <div class="section-title">
-          <p>Recent Images</p>
+          <p>All Images</p>
           <h2></h2>
         </div>
 
@@ -29,14 +29,14 @@
                 <p style="font-size: 11px">Uploaded by {{portfolio.user}} </p>
 
                 <div class="portfolio-links" id="no-link">
-                  <a href="{{ portfolio.file.url }}"  data-gall="portfolioGallery" class="venobox" title="View Image">
-                    <i  class="bx bx-show-alt" ></i>
+                  <a href="{{ portfolio.file.url }}" data-gall="portfolioGallery" class="venobox" title="View Image">
+                    <i class="bx bx-show-alt"></i>
                   </a>
                   <a download href="{{ portfolio.file.url }}" title="Download" target="_blank">
                     <i class='bx bxs-download pl-2'></i>
                   </a>
                   <a href="{% url 'hireme' %}" title="Hire Me">
-                    <button type="button" class="float- custom-button btn-danger btn-sm" >Hire Me</button>
+                    <button type="button" class="float- custom-button btn-danger btn-sm">Hire Me</button>
                   </a>
 
                 </div>
@@ -52,7 +52,7 @@
 
   </main><!-- End #main -->
 
-{% block script %};
+{% block script %}
 
 {% endblock script %}
 
