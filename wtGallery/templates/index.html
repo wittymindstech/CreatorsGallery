@@ -56,9 +56,9 @@
                 <div class="input-group-prepend">
                     <button class="btn btn-light dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Image</button>
                     <div class="dropdown-menu">
-                      <a class="dropdown-item" href="{% url 'AllVideos' %}" name="v">Video</a>
-                      <a class="dropdown-item" href="{% url 'AllMusics' %}" name="m">Music</a>
-                      <a class="dropdown-item" name="i" href="{% url 'AllImages' %}">Images</a>
+                      <a class="dropdown-item" href="{% url 'video' %}" name="v">Video</a>
+                      <a class="dropdown-item" href="{% url 'music' %}" name="m">Music</a>
+                        <a class="dropdown-item" href="{% url 'image' %}">Image</a>
 
 
 
@@ -98,15 +98,39 @@
                 <p style="font-size: 11px">Uploaded by <a href="{% url 'profile' username=portfolio.user.username %}">{{portfolio.user}} </a></p>
 
                 <div class="portfolio-links" id="no-link">
-                  <a href="{{ portfolio.file.url }}" data-gall="portfolioGallery" class="venobox" title="View Image">
+                  <a href="{{ portfolio.file.url }}" onclick="views({{portfolio.id}})"  data-gall="portfolioGallery" class="venobox" title="View Image">
                     <i class="bx bx-show-alt"></i>
                   </a>
-                  <a download href="{{ portfolio.file.url }}" title="Download">g
+                  <a download href="{{ portfolio.file.url }}" onclick="dow({{portfolio.id}})" title="Download">g
                     <i class='bx bxs-download pl-2'></i>
                   </a>
-
+                    <p>Views:</p>
+                  <p id="views{{portfolio.id}}"  >{{portfolio.views}}</p>
+                  <p>Downloads</p><p id="dow{{portfolio.id}}" >{{portfolio.total_downloads}}</p>
+ <a href="{% url 'hireme' %}" title="Hire Me">
+                    <button type="button" class="float- custom-button btn-danger btn-sm" >Hire Me</button>
+                  </a>
                 </div>
-              </div>
+
+                  {% if user.is_authenticated %}
+
+    {% if user.username in portfolio.likes %}
+
+                 <button type="submit" onclick="like({{portfolio.id}});" name="post_id" id="l{{portfolio.id}}" value="{{portfolio.id}}" class="btn btn-primary btn-sm">
+                   Unlike
+                 </button>
+                  {% else %}
+                  <button type="submit" onclick="like({{portfolio.id}});" name="post_id" id="l{{portfolio.id}}" value="{{portfolio.id}}" class="btn btn-primary btn-sm">
+                   Like
+                 </button>
+{% endif %}
+
+                {% else %}
+                <a class="btn btn-outline-info" href="{% url 'login' %}">Log in to like this article</a><br>
+                {% endif %}
+
+
+              </div><strong class="text-secondary" >Total likes:<span id="total_likes{{portfolio.id}}">{{portfolio.number_of_liked}}</span></strong>
             </div>
           </div>
           {% endfor %}
@@ -144,7 +168,71 @@
   </main><!-- End #main -->
 
 {% block script %}
+<script>
+function like(id){
 
+var v=id.toString();
+console.log(v);
+v=parseInt(v);
+$.ajax({
+url:"{% url 'imagelikes' %}",
+method:"POST",
+data:{'id':v},
+success:function(data){
+document.getElementById("total_likes"+v).innerHTML=data['total_likes'];
+console.log(data['total_likes']);
+if(data['liked']){
+console.log(data['liked']);
+document.getElementById("l"+v).innerHTML="Unlike";
+}
+
+
+else{
+console.log(data['liked']);
+document.getElementById("l"+v).innerHTML="like";
+
+}
+console.log("success");
+},
+});
+};
+
+function views(id){
+console.log("views clicked");
+var idstr=id;
+
+console.log(idstr);
+$.ajax({
+url:"{% url 'saveviews' %}",
+method:"GET",
+data:{'obj':idstr ,},
+dataType:'json',
+success:function(data){
+document.getElementById("views"+idstr).innerHTML=data['status'];
+console.log(data);
+},
+}
+);
+
+};
+function dow(id){
+console.log("inside download");
+var idstr=id;
+console.log(idstr);
+$.ajax({
+url:"{% url 'countdownloads' %}",
+method:"GET",
+data:{'obj':idstr ,},
+dataType:'json',
+success:function(data){
+document.getElementById("dow"+idstr).innerHTML=data['status'];
+console.log(data);
+},
+}
+);
+
+}
+</script>
 {% endblock script %}
 
 {% endblock body %}
