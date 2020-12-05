@@ -19,10 +19,11 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('search/', views.SearchResultsView.as_view(), name='search'),
     re_path(r'^.*\.html', views.pages, name='pages'),
-    path('AllVideos/',views.AllVideos,name='AllVideos'),
-    path('AllImages/', views.AllImages, name='AllImages'),
-    path('AllMusics/', views.AllMusic, name='AllMusics'),
+    path('saveviews/',views.save_views,name='saveviews'),
     path('hireme/',views.hire_me,name='hireme'),
+    path('musicviews/',views.save_music_view,name='musicviews'),
+    path('countdownloads/',views.count_downloads,name='countdownloads'),
+    path('imagelikes/', views.count_likes,name='imagelikes'),
 ]
 
 if settings.DEBUG:
