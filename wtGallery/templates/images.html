@@ -26,45 +26,22 @@
               <div class="portfolio-info">
                 <h4>{{ portfolio.title }}</h4>
 
-
+                <p style="font-size: 11px">Uploaded by {{portfolio.user}} </p>
 
                 <div class="portfolio-links" id="no-link">
-                  <a href="{{ portfolio.file.url }}" onclick="views({{portfolio.id}})" data-gall="portfolioGallery" class="venobox" title="View Image">
-                    <i  class="bx bx-show-alt" ></i>
+                  <a href="{{ portfolio.file.url }}" data-gall="portfolioGallery" class="venobox preview-link" title="{{ portfolio.title }}">
+                    <i class="bx bx-show-alt"></i>
+                  </a>
+                  <a download href="{{ portfolio.file.url }}" title="Download" target="_blank">
+                    <i class='bx bxs-download pl-2'></i>
+                  </a>
+                  <a href="#" title="Hire Me">
+                    <button type="button" class="float- custom-button btn-danger btn-sm">Hire Me</button>
                   </a>
 
-                  <!--<a href="{% url 'hireme' %}" title="Hire Me">-->
-                    <!--<button type="button" class="float- custom-button btn-danger btn-sm" >Hire Me</button>-->
-                  <!--</a>-->
-
-
                 </div>
-                {% if user.is_authenticated %}
-
-                  {% if user.username in portfolio.likes %}
-
-                 <button type="submit" onclick="like({{portfolio.id}});" name="post_id" id="ul{{portfolio.id}}" value="{{portfolio.id}}" class="btn btn-primary btn-sm">
-                   Unlike
-                 </button>
-                {% else %}
-                 <button type="submit" onclick="like({{portfolio.id}});" name="post_id" id="l{{portfolio.id}}" value="{{portfolio.id}}" class="btn btn-primary btn-sm">
-                   Like
-                 </button>
-                {% endif %}
-
-
-
-                {% else %}
-                <a class="btn btn-outline-info" href="{% url 'login' %}">Log in to like this article</a><br>
-                {% endif %}
-
-
-              </div> <strong class="text-secondary" >Total likes:<span id="total_likes{{portfolio.id}}">{{portfolio.number_of_liked}}</span></strong>
-            </div> <p style="font-size: 11px">Uploaded by {{portfolio.user}} </p>
-             <p id="views{{portfolio.id}}"  >{{portfolio.views}}</p>
-                  <a download href="{{ portfolio.file.url }}" onclick="dow({{portfolio.id}})" title="Download" target="_blank">
-                    <i class='bx bxs-download pl-2'></i>
-                  </a><p id="dow{{portfolio.id}}" >{{portfolio.total_downloads}}</p>
+              </div>
+            </div>
           </div>
           {% endfor %}
         </div>
@@ -76,74 +53,7 @@
   </main><!-- End #main -->
 
 {% block script %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
-function like(id){
 
-var v=id.toString();
-console.log("like button");
-v=parseInt(v);
-console.log(v);
-$.ajax({
-url:"{% url 'imagelikes' %}",
-method:"POST",
-data:{'id':v},
-success:function(data){
-document.getElementById("total_likes"+v).innerHTML=data['total_likes'];
-if(data['liked']){
-console.log(data['liked']);
-console.log("l"+data['id']);
-document.getElementById("l"+data['id']).innerHTML="Unlike";
-
-}
-else{
-console.log(data['liked'])
-console.log("ul"+data['id']);
-document.getElementById("l"+data['id']).innerHTML="Like";
-}
-console.log("success");
-},
-});
-}
-
-function views(id){
-console.log("views clicked");
-var idstr=id;
-
-console.log(idstr);
-$.ajax({
-url:"{% url 'saveviews' %}",
-method:"GET",
-data:{'obj':idstr ,},
-dataType:'json',
-success:function(data){
-document.getElementById("views"+idstr).innerHTML=data['status'];
-console.log(data);
-},
-}
-);
-
-};
-
-
-function dow(id){
-console.log("inside download");
-var idstr=id;
-console.log(idstr);
-$.ajax({
-url:"{% url 'countdownloads' %}",
-method:"GET",
-data:{'obj':idstr ,},
-dataType:'json',
-success:function(data){
-document.getElementById("dow"+idstr).innerHTML=data['status'];
-console.log(data);
-},
-}
-);
-
-}
-</script>
 {% endblock script %}
 
 {% endblock body %}

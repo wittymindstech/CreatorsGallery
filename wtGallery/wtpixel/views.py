@@ -16,80 +16,22 @@ from django.views.generic.base import View
 from wtpixel.forms import ImageForm, SignUpForm, LoginForm, VideoForm, MusicForm
 from django.contrib import messages
 from wtpixel.models import Image, Video, Music
-from django.http import JsonResponse,HttpResponseRedirect
-from django.views.decorators.csrf import csrf_exempt
-from django.urls import reverse
-# import nude
+import nude
 
 
-# def index(request):
-#     portfolio = Image.objects.all()
-#     context = {"portfolio": portfolio}
-#     return render(request, "index.html", context)
+def index(request):
+    portfolio = Image.objects.all()
+    context = {"portfolios": portfolio}
+    return render(request, "index.html", context)
 
-class IndexView(ListView):
-    model = Image
-    paginate_by = 10
-    context_object_name = 'portfolios'
-    template_name = 'index.html'
-    ordering = ['title']
-def save_views(req):
-    if req.method =="GET":
-
-        pk=req.GET.get("obj")
-        obj=Image.objects.get(pk=pk)
-        obj.views+=1
-        obj.save()
-
-        print("inside save view")
-
-        return JsonResponse({'status':obj.views})
-    pass
-@csrf_exempt
-def count_likes(req):
+# class IndexView(ListView):
+#     model = Image
+#     paginate_by = 10
+#     context_object_name = 'portfolios'
+#     template_name = 'index.html'
+#     ordering = ['title']
 
 
-    if req.method=='POST':
-        print("inside")
-        post=get_object_or_404(Image,id=req.POST.get("id"))
-        print(req.POST.get("id"))
-
-        liked=False
-        if post.likes.filter(id=req.user.id).exists():
-            post.likes.remove(req.user)
-
-        else:
-            liked=True
-            post.likes.add(req.user)
-
-        total_likes = post.number_of_liked;
-        print(total_likes)
-        print("end view")
-        print(req.user)
-        return JsonResponse({'liked':liked ,'total_likes':total_likes,'id':str(req.POST.get("id"))})
-    pass
-
-def save_music_view(req):
-    if req.method=='GET':
-        pk=req.GET.get("obj")
-        obj=Music.objects.get(pk=pk)
-        obj.views+=1
-        obj.save()
-        print('inside music views')
-        return JsonResponse({'status':obj.views})
-    pass
-
-def count_downloads(req):
-    if req.method =="GET":
-
-        pk=req.GET.get("obj")
-        obj=Image.objects.get(pk=pk)
-        obj.total_downloads+=1
-        obj.save()
-
-        print("inside save view")
-
-    return JsonResponse({'status':obj.total_downloads})
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     us = User.objects.filter(username = user)
@@ -98,9 +40,7 @@ def profile(request, username):
 
 def image(request):
     portfolio = Image.objects.all()
-
     context = {"portfolio": portfolio}
-
     return render(request, "images.html", context)
 
 
@@ -115,6 +55,7 @@ def music(request):
     print(portfolio)
     context = {"portfolio": portfolio}
     return render(request, "music.html", context)
+
 
 def register(request):
     if request.method == 'POST':
@@ -248,8 +189,7 @@ class SearchResultsView(ListView):
         print(object_list)
         return object_list
 
-def hire_me(req):
-    return render(req,'hireme.html')
+
 @login_required(login_url="/login/")
 def pages(request):
     context = {}
