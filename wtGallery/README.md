@@ -11,7 +11,7 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
 
 4. Mobile Friendly website.
 
-5. User own dashboard where they can manage their profile.
+5. User own dashboard where you can manage their profile.
 
 **How to get this project**
 1. Clone this project and open it on your python IDE.
@@ -32,7 +32,7 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
     2. python manage.py migrate
     ```
     ```
-    3. python manage.py runserver
+    3. python maage.py runserver
     ```
 
 
@@ -42,8 +42,16 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
 
 - Home
 
-![](sample/Home.PNG)
+![](sample/Main.png)
 
 - Upload Image and Video page 
 
-![](sample/Upload.PNG)
+![](sample/upload.png)
+
+- Image page 
+
+![](sample/image.png)
+
+- Video page 
+
+![](sample/video.png)
