@@ -4,7 +4,7 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
 # gaurav's changes
 **Features of this projects is:**
 1. AWS Integrated (you have to use your own AWS api keys, just add in Settings files).
-
+#changes 
 2. Support Payment gateway like:- Razorpay or Stripe.
 
 3. Nude and sensitive photo and video detection.
