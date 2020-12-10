@@ -22,17 +22,25 @@ from django.urls import reverse
 # import nude
 
 
-# def index(request):
-#     portfolio = Image.objects.all()
-#     context = {"portfolio": portfolio}
-#     return render(request, "index.html", context)
+def index(request):
+    portfolio = Image.objects.all()
+    context = {"portfolios": portfolio}
 
-class IndexView(ListView):
-    model = Image
-    paginate_by = 10
-    context_object_name = 'portfolios'
-    template_name = 'index.html'
-    ordering = ['title']
+    return render(request, "index.html", context)
+def rank(req):
+    d={}
+    obj=Image.objects.all()
+    print(obj)
+    for i in obj.user:
+        print(i.id)
+    return render(req,'rank.html',{'users':obj})
+#
+# class IndexView(ListView):
+#     model = Image
+#     paginate_by = 10
+#     context_object_name = 'portfolios'
+#     template_name = 'index.html'
+#     ordering = ['title']
 def save_views(req):
     if req.method =="GET":
 
@@ -90,10 +98,26 @@ def count_downloads(req):
         print("inside save view")
 
     return JsonResponse({'status':obj.total_downloads})
+def profile_videos(req,username):
+    user = get_object_or_404(User, username=username)
+    print(user)
+    # us = User.objects.filter(username = user)
+    # print(us.first_name)
+    videos = Video.objects.filter(user=user)
+    print(user.first_name)
+    print(videos)
+    return render(req, 'profile_videos.html', {'profile': user, 'videos': videos})
+def profile_music(req,username):
+    pass
 def profile(request, username):
     user = get_object_or_404(User, username=username)
-    us = User.objects.filter(username = user)
-    return render(request, 'dashboard.html', {'profile': us})
+    print(user)
+    # us = User.objects.filter(username = user)
+    # print(us.first_name)
+    images=Image.objects.filter(user=user)
+    print(user.first_name)
+    print(images)
+    return render(request, 'dashboard.html', {'profile': user,'images':images})
 
 
 def image(request):

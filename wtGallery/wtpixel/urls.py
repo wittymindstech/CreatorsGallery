@@ -7,8 +7,8 @@ from django.contrib.auth.views import LogoutView
 
 
 urlpatterns = [
-    # path('', views.index, name='index'),
-    path('', views.IndexView.as_view(), name='index'),
+    path('', views.index, name='index'),
+    # path('', views.IndexView.as_view(), name='index'),
     path('profile/<str:username>', views.profile, name='profile'),
     path('upload/', views.upload, name='upload'),
     path('video/', views.video, name='video'),
@@ -24,6 +24,9 @@ urlpatterns = [
     path('musicviews/',views.save_music_view,name='musicviews'),
     path('countdownloads/',views.count_downloads,name='countdownloads'),
     path('imagelikes/', views.count_likes,name='imagelikes'),
+    path('rank/', views.rank),
+    path('profilevideos/<str:username>', views.profile_videos ,name='profilevideos'),
+    path('profilemusics/<str:username>', views.profile_music , name='profilemusics'),
 ]
 
 if settings.DEBUG:
