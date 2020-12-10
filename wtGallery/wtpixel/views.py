@@ -108,7 +108,14 @@ def profile_videos(req,username):
     print(videos)
     return render(req, 'profile_videos.html', {'profile': user, 'videos': videos})
 def profile_music(req,username):
-    pass
+    user = get_object_or_404(User, username=username)
+    print(user)
+    # us = User.objects.filter(username = user)
+    # print(us.first_name)
+    musics = Music.objects.filter(user=user)
+    print(user.first_name)
+    print(musics)
+    return render(req, 'profile_videos.html', {'profile': user, 'videos': musics})
 def profile(request, username):
     user = get_object_or_404(User, username=username)
     print(user)
