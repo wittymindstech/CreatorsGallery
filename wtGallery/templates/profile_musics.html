@@ -59,9 +59,11 @@
         <span class="follow">Follow</span>
 
         <div class="row gallery">
-          {% for image in images %}
+          {% for music in musics %}
           <div class="col-md-4">
-             <img src="{{image.file.url}}"/>
+             <audio id="player" style="margin-top:10px;margin-bottom:10px"   controls onclick="views(1)"  download>
+                 <source src="{{ portfolio.file.url }}"  name="{portfolio.file.name}}" type="audio/mp3" download="{portfolio.file.name}}">
+              </audio>
           </div>
         {% endfor %}
         </div>

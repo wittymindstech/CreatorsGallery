@@ -9,37 +9,89 @@
 {% block body %}
   <main id="main" style="margin-top:78px;">
     <!-- ======= Portfolio Section ======= -->
-    <section id="portfolio" class="portfolio">
-      <div class="container">
+    <!--<section id="portfolio" class="portfolio">-->
+      <!--<div class="container">-->
 
-        <div class="section-title">
-          <p>Recent Images</p>
-          <h2></h2>
-        </div>
+        <!--<div class="section-title">-->
+          <!--<p>Recent Images</p>-->
+          <!--<h2></h2>-->
+        <!--</div>-->
 
-        <div class="row portfolio-container">
-          {% for portfolio in portfolio %}
+        <!--<div class="row portfolio-container">-->
+          <!--{% for portfolio in portfolio %}-->
 
-          <div class="col-lg-4 col-md-6 portfolio-item">
-            <div class="portfolio-wrap">
-              <img src="{{ portfolio.file.url }}" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <h4>{{ portfolio.title }}</h4>
+          <!--<div class="col-lg-4 col-md-6 portfolio-item">-->
+            <!--<div class="portfolio-wrap">-->
+              <!--<img src="{{ portfolio.file.url }}" class="img-fluid" alt="">-->
+              <!--<div class="portfolio-info">-->
+                <!--<h4>{{ portfolio.title }}</h4>-->
 
 
 
-                <div class="portfolio-links" id="no-link">
-                  <a href="{{ portfolio.file.url }}" onclick="views({{portfolio.id}})" data-gall="portfolioGallery" class="venobox" title="View Image">
-                    <i  class="bx bx-show-alt" ></i>
-                  </a>
-
-                  <!--<a href="{% url 'hireme' %}" title="Hire Me">-->
-                    <!--<button type="button" class="float- custom-button btn-danger btn-sm" >Hire Me</button>-->
+                <!--<div class="portfolio-links" id="no-link">-->
+                  <!--<a href="{{ portfolio.file.url }}" onclick="views({{portfolio.id}})" data-gall="portfolioGallery" class="venobox" title="View Image">-->
+                    <!--<i  class="bx bx-show-alt" ></i>-->
                   <!--</a>-->
 
+                  <!--&lt;!&ndash;<a href="{% url 'hireme' %}" title="Hire Me">&ndash;&gt;-->
+                    <!--&lt;!&ndash;<button type="button" class="float- custom-button btn-danger btn-sm" >Hire Me</button>&ndash;&gt;-->
+                  <!--&lt;!&ndash;</a>&ndash;&gt;-->
 
-                </div>
-                {% if user.is_authenticated %}
+
+                <!--</div>-->
+                <!--{% if user.is_authenticated %}-->
+
+                  <!--{% if user.username in portfolio.likes %}-->
+
+                 <!--<button type="submit" onclick="like({{portfolio.id}});" name="post_id" id="ul{{portfolio.id}}" value="{{portfolio.id}}" class="btn btn-primary btn-sm">-->
+                   <!--Unlike-->
+                 <!--</button>-->
+                <!--{% else %}-->
+                 <!--<button type="submit" onclick="like({{portfolio.id}});" name="post_id" id="l{{portfolio.id}}" value="{{portfolio.id}}" class="btn btn-primary btn-sm">-->
+                   <!--Like-->
+                 <!--</button>-->
+                <!--{% endif %}-->
+
+
+
+                <!--{% else %}-->
+                <!--<a class="btn btn-outline-info" href="{% url 'login' %}">Log in to like this article</a><br>-->
+                <!--{% endif %}-->
+
+
+              <!--</div> <strong class="text-secondary" >Total likes:<span id="total_likes{{portfolio.id}}">{{portfolio.number_of_liked}}</span></strong>-->
+            <!--</div> <p style="font-size: 11px">Uploaded by {{portfolio.user}} </p>-->
+             <!--<p id="views{{portfolio.id}}"  >{{portfolio.views}}</p>-->
+                  <!--<a download href="{{ portfolio.file.url }}" onclick="dow({{portfolio.id}})" title="Download" target="_blank">-->
+                    <!--<i class='bx bxs-download pl-2'></i>-->
+                  <!--</a><p id="dow{{portfolio.id}}" >{{portfolio.total_downloads}}</p>-->
+          <!--</div>-->
+          <!--{% endfor %}-->
+        <!--</div>-->
+
+      <!--</div>-->
+    <!--</section>-->
+    {% for portfolio in portfolio %}
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+          <div class="container" data-aos="fade-up">
+
+            <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+
+              <div class="col-lg-4 col-md-6 portfolio-item">
+                <img src="{{ portfolio.file.url }}"  class="img-fluid" alt="{{ portfolio.title }}">
+                <div class="portfolio-info">
+                  <h4>{{ portfolio.title }}</h4>
+                  <p style="font-size: 11px">Uploaded by <a href="{% url 'profile' username=portfolio.user.username %}">{{portfolio.user}}</a></p>
+                  <a href="{{ portfolio.file.url }}" onclick="views({{portfolio.id}})" data-gall="portfolioGallery" class="venobox preview-link" title="{{ portfolio.title }}">
+                    <i class="bx bx-show-alt"></i>
+                  </a>
+                  <a href="{{ portfolio.file.url }}" onclick="dow({{portfolio.id}})" class="details-link" title="Download" download>
+                    <i class='bx bxs-download pl-2'></i>
+                  </a>
+                   <p  id="views{{portfolio.id}}"  >{{portfolio.views}}</p>
+                  <span id="dow{{portfolio.id}}">{{portfolio.total_downloads}}</span>
+                   {% if user.is_authenticated %}
 
                   {% if user.username in portfolio.likes %}
 
@@ -60,17 +112,15 @@
 
 
               </div> <strong class="text-secondary" >Total likes:<span id="total_likes{{portfolio.id}}">{{portfolio.number_of_liked}}</span></strong>
-            </div> <p style="font-size: 11px">Uploaded by {{portfolio.user}} </p>
-             <p id="views{{portfolio.id}}"  >{{portfolio.views}}</p>
-                  <a download href="{{ portfolio.file.url }}" onclick="dow({{portfolio.id}})" title="Download" target="_blank">
-                    <i class='bx bxs-download pl-2'></i>
-                  </a><p id="dow{{portfolio.id}}" >{{portfolio.total_downloads}}</p>
-          </div>
-          {% endfor %}
-        </div>
+                </div>
+              </div>
 
-      </div>
-    </section>
+            </div>
+
+          </div>
+        </section>
+        <!-- End Portfolio Section -->
+        {% endfor %}
     <!-- End Portfolio Section -->
 
   </main><!-- End #main -->

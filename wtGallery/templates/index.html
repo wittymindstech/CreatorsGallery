@@ -95,7 +95,7 @@
           <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
             <div class="icon-box">
               <i class="ri-music-line" style="color: #e80368;"></i>
-              <h3><a href="#">Musics</a></h3>
+              <h3><a href="{% url 'music' %}">Musics</a></h3>
             </div>
           </div>
           <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
@@ -126,16 +126,39 @@
             <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
               <div class="col-lg-4 col-md-6 portfolio-item">
-                <img src="{{ portfolio.file.url }}" class="img-fluid" alt="{{ portfolio.title }}">
+                <img src="{{ portfolio.file.url }}"  class="img-fluid" alt="{{ portfolio.title }}">
                 <div class="portfolio-info">
                   <h4>{{ portfolio.title }}</h4>
                   <p style="font-size: 11px">Uploaded by <a href="{% url 'profile' username=portfolio.user.username %}">{{portfolio.user}}</a></p>
-                  <a href="{{ portfolio.file.url }}" data-gall="portfolioGallery" class="venobox preview-link" title="{{ portfolio.title }}">
+                  <a href="{{ portfolio.file.url }}" onclick="views({{portfolio.id}})" data-gall="portfolioGallery" class="venobox preview-link" title="{{ portfolio.title }}">
                     <i class="bx bx-show-alt"></i>
                   </a>
-                  <a href="{{ portfolio.file.url }}" class="details-link" title="Download" download>
+                  <a href="{{ portfolio.file.url }}" onclick="dow({{portfolio.id}})" class="details-link" title="Download" download>
                     <i class='bx bxs-download pl-2'></i>
                   </a>
+                   <p  id="views{{portfolio.id}}"  >{{portfolio.views}}</p>
+                  <span id="dow{{portfolio.id}}">{{portfolio.total_downloads}}</span>
+                   {% if user.is_authenticated %}
+
+                  {% if user.username in portfolio.likes %}
+
+                 <button type="submit" onclick="like({{portfolio.id}});" name="post_id" id="ul{{portfolio.id}}" value="{{portfolio.id}}" class="btn btn-primary btn-sm">
+                   Unlike
+                 </button>
+                {% else %}
+                 <button type="submit" onclick="like({{portfolio.id}});" name="post_id" id="l{{portfolio.id}}" value="{{portfolio.id}}" class="btn btn-primary btn-sm">
+                   Like
+                 </button>
+                {% endif %}
+
+
+
+                {% else %}
+                <a class="btn btn-outline-info" href="{% url 'login' %}">Log in to like this article</a><br>
+                {% endif %}
+
+
+              </div> <strong class="text-secondary" >Total likes:<span id="total_likes{{portfolio.id}}">{{portfolio.number_of_liked}}</span></strong>
                 </div>
               </div>
 
@@ -153,7 +176,74 @@
   <!-- End #main -->
 
 {% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+function like(id){
 
+var v=id.toString();
+console.log("like button");
+v=parseInt(v);
+console.log(v);
+$.ajax({
+url:"{% url 'imagelikes' %}",
+method:"POST",
+data:{'id':v},
+success:function(data){
+document.getElementById("total_likes"+v).innerHTML=data['total_likes'];
+if(data['liked']){
+console.log(data['liked']);
+console.log("l"+data['id']);
+document.getElementById("l"+data['id']).innerHTML="Unlike";
+
+}
+else{
+console.log(data['liked'])
+console.log("ul"+data['id']);
+document.getElementById("l"+data['id']).innerHTML="Like";
+}
+console.log("success");
+},
+});
+}
+
+function views(id){
+console.log("views clicked");
+var idstr=id;
+
+console.log(idstr);
+$.ajax({
+url:"{% url 'saveviews' %}",
+method:"GET",
+data:{'obj':idstr ,},
+dataType:'json',
+success:function(data){
+document.getElementById("views"+idstr).innerHTML=data['status'];
+console.log(data);
+},
+}
+);
+
+};
+
+
+function dow(id){
+console.log("inside download");
+var idstr=id;
+console.log(idstr);
+$.ajax({
+url:"{% url 'countdownloads' %}",
+method:"GET",
+data:{'obj':idstr ,},
+dataType:'json',
+success:function(data){
+document.getElementById("dow"+idstr).innerHTML=data['status'];
+console.log(data);
+},
+}
+);
+
+}
+</script>
 {% endblock script %}
 
 {% endblock body %}
