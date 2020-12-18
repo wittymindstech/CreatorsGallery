@@ -24,14 +24,17 @@ from django.urls import reverse
 
 def index(request):
     portfolio = Image.objects.all()
+    for i in portfolio:
+        print(i.likes)
     context = {"portfolios": portfolio}
 
     return render(request, "index.html", context)
 def rank(req):
     d={}
     obj=Image.objects.all()
-    print(obj)
-    for i in obj.user:
+
+    print(len(obj))
+    for i in obj:
         print(i.id)
     return render(req,'rank.html',{'users':obj})
 #
@@ -52,6 +55,29 @@ def save_views(req):
         print("inside save view")
 
         return JsonResponse({'status':obj.views})
+    pass
+def save_video_views(req):
+    if req.method=='GET':
+        pk = req.GET.get("obj")
+        obj = Video.objects.get(pk=pk)
+        obj.views += 1
+        obj.save()
+
+        print("inside save view")
+
+        return JsonResponse({'status': obj.views})
+    pass
+def music_views(req):
+    if req.method=='GET':
+
+        pk = req.GET.get("obj")
+        obj = Music.objects.get(pk=pk)
+        obj.views += 1
+        obj.save()
+
+    print("inside save view")
+
+    return JsonResponse({'status': obj.views})
     pass
 @csrf_exempt
 def count_likes(req):
@@ -150,10 +176,13 @@ def music(request):
 def register(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
+
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password1')
+
+            print("inside registration")
             user = authenticate(username=username, password=password)
             login(request, user)
             return redirect('login')

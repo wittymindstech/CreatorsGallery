@@ -27,6 +27,9 @@ urlpatterns = [
     path('rank/', views.rank),
     path('profilevideos/<str:username>', views.profile_videos ,name='profilevideos'),
     path('profilemusics/<str:username>', views.profile_music , name='profilemusics'),
+    path('save_video_views/', views.save_video_views,name='save_video_views'),
+    path('save_music_views/', views.save_music_view,name='save_music_views'),
+    path('hireme/', views.hire_me,name='hireme'),
 ]
 
 if settings.DEBUG:
