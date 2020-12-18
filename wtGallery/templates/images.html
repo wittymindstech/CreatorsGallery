@@ -159,8 +159,14 @@ console.log("success");
 function views(id){
 console.log("views clicked");
 var idstr=id;
-
+if(localStorage.getItem('images')==undefined)
+var images={};
+else{
+var images=localStorage.getItem('images');
+images=JSON.parse(images);}
+console.log(images);
 console.log(idstr);
+if(images['id'+idstr]==undefined){
 $.ajax({
 url:"{% url 'saveviews' %}",
 method:"GET",
@@ -168,10 +174,13 @@ data:{'obj':idstr ,},
 dataType:'json',
 success:function(data){
 document.getElementById("views"+idstr).innerHTML=data['status'];
+images['id'+idstr]=idstr;
+console.log("success");
+localStorage.setItem('images',JSON.stringify(images));
 console.log(data);
 },
 }
-);
+);}
 
 };
 

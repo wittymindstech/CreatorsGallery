@@ -1,6 +1,6 @@
 {% extends 'layout.html' %}
 {% load static %}
-{% block title %} Video's {% endblock %}
+{% block title %} Music's {% endblock %}
 {% block style %}
 <style>
 </style>
@@ -21,8 +21,8 @@
           {% for portfolio in portfolio %}
 
           <div class="col-lg-4 col-md-6 portfolio-item">
-              <audio id="player" style="margin-top:10px;margin-bottom:10px"   controls onclick="views(1)"  download>
-                 <source src="{{ portfolio.file.url }}"  name="{portfolio.file.name}}" type="audio/mp3" download="{portfolio.file.name}}">
+              <audio id="{{portfolio.id}}" onplay="views({{portfolio.id}});"  style="margin-top:10px;margin-bottom:10px"   controls   download>
+                 <source  src="{{ portfolio.file.url }}"  name="{{portfolio.file.name}}" type="audio/mp3" download="{{portfolio.file.name}}">
               </audio>
               <div class="mx-auto my-1 col-lg-12 d-block" style="font-size: 10px;">
                 <p class="float-left">
@@ -30,7 +30,7 @@
                   <span class="font-weight-bold">Audio:</span> <a href="{% url 'profile' username=portfolio.title %}">{{portfolio.title}}</a>
                 </p>
                 <p class="float-right">
-                  <span class="font-weight-bold" id="views{{portfolio.id}}">Views:</span> {{portfolio.views}}
+                  <span class="font-weight-bold" id="views{{portfolio.id}}">{{portfolio.views}}</span>
                 </p>
               </div>
           </div>
@@ -44,7 +44,38 @@
   </main><!-- End #main -->
 
 {% block script %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
+<script>
+  function views(id){
+
+  console.log("inside views");
+  var idstr=id.toString();
+console.log(localStorage.getItem('music'));
+if(localStorage.getItem('music')==undefined)
+var music={};
+else{
+var music=localStorage.getItem('music');
+music=JSON.parse(music);}
+console.log(music);
+if(music['id'+idstr]==undefined){
+$.ajax({
+url:"{% url 'save_music_views' %}",
+method:"GET",
+data:{'obj':idstr ,},
+dataType:'json',
+success:function(data){
+document.getElementById("views"+idstr).innerHTML=data['status'];
+
+music['id'+idstr]=idstr;
+console.log("success");
+localStorage.setItem('music',JSON.stringify(music));
+
+},
+}
+);}
+  }
+</script>
 {% endblock script %}
 
 {% endblock body %}
