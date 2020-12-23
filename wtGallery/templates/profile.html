@@ -1,0 +1,115 @@
+{% extends 'layout.html' %}
+{% load static %}
+{% block title %} Profile {% endblock %}
+{% block head %}
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'>
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="{% static 'assets/css/profile-style.css' %}">
+{% endblock %}
+
+{% block body %}
+
+  <div class="container mb-5" style="margin-top:100px;">
+  <header class="pheader">
+  </header>
+  <main>
+      {% for pr in profile %}
+    <div class="row">
+
+      <div class="left col-lg-4">
+        <div class="photo-left">
+          <img class="photo" src="https://images.pexels.com/photos/1804796/pexels-photo-1804796.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"/>
+        </div>
+        <h4 class="name">{{pr.first_name}} {{pr.last_name}}</h4>
+        <p class="info">UI/UX Designer</p>
+        <p class="info">{{pr.email}}</p>
+        <div class="stats row">
+          <div class="stat col-xs-4" style="padding-right: 50px;">
+            <p class="number-stat">3,619</p>
+            <p class="desc-stat">Followers</p>
+          </div>
+          <div class="stat col-xs-4">
+            <p class="number-stat">42</p>
+            <p class="desc-stat">Following</p>
+          </div>
+          <div class="stat col-xs-4" style="padding-left: 50px;">
+            <p class="number-stat">38</p>
+            <p class="desc-stat">Uploads</p>
+          </div>
+        </div>
+        <p class="desc">Hi ! My name is {{pr.first_name}} {{pr.last_name}}. I'm a UI/UX Designer from Paris, in France. I really enjoy photography and moutains.</p>
+        <div class="social">
+          <i class="fa fa-facebook-square" aria-hidden="true"></i>
+          <i class="fa fa-twitter-square" aria-hidden="true"></i>
+          <i class="fa fa-pinterest-square" aria-hidden="true"></i>
+          <i class="fa fa-tumblr-square" aria-hidden="true"></i>
+        </div>
+      </div>
+      <div class="right col-lg-8">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Images</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Videos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Musics</a>
+          </li>
+        </ul>
+        <form class="float-right" style="margin-top:45px;">
+          <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_GEOivZvzAxgEK1"></script>
+        </form>
+        <div class="tab-content mt-4" id="myTabContent">
+          <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+            <section id="portfolio" class="portfolio">
+              <div class="container" data-aos="fade-up">
+
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
+                  {% for portfolio in image %}
+                  <div class="col-lg-4 col-md-6 portfolio-item">
+                    <img src="{{ portfolio.file.url }}" class="img-fluid" alt="{{ portfolio.title }}">
+                    <div class="portfolio-info">
+                      <h4 style="font-size:13px;">{{ portfolio.title }}</h4>
+                      <a href="{{ portfolio.file.url }}" data-gall="portfolioGallery" class="venobox preview-link" title="{{ portfolio.title }}">
+                        <i class="bx bx-show-alt"></i>
+                      </a>
+                      <a href="{{ portfolio.file.url }}" class="details-link" title="Download" download>
+                        <i class='bx bxs-download pl-2'></i>
+                      </a>
+                    </div>
+                  </div>
+                  {% endfor %}
+                </div>
+
+              </div>
+            </section>
+          </div>
+          <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+            <div class="row gallery">
+              {% for portfolio in video %}
+              <div class="col-lg-6 col-md-6 portfolio-item">
+                <video id="my-video" class="video-js vjs-theme-forest" controls preload="auto" width="300" height="200" data-setup="{}">
+                  <source src="{{ portfolio.file.url }}" type="video/mp4">
+                </video>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+          <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+            Music
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+      {% endfor %}
+</div>
+
+{% block script %}
+
+{% endblock script %}
+
+{% endblock body %}
+
