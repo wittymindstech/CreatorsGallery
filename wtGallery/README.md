@@ -40,7 +40,7 @@ India's own website like pixabay or pexels, which developed on Python - Django. 
 
 **After all these settings and installations, you'll get this:**
 
-- You can visit our Test Website also :- [wTGallery](https://wtgallery.herokuapp.com/ "WTGALLERY")
+- You can visit our Test Website also :- [wTGallery](https://www.pixzium.com/ "WTGALLERY")
 
 - Home
 
