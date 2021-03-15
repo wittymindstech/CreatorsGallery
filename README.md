@@ -6,3 +6,6 @@ Object Photo Video Gallery &amp; Free Downloads
 
 # --------------------------------------------- VIDEOS DASHBOARD FROM AWS S3 USING CLOUDFRONT -----------------------------------------
 ![](wtpixel_video.png)
+
+
+<form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Gmqfrpfxzt1Eb0" async> </script> </form>
