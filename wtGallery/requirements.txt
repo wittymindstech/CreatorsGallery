@@ -27,7 +27,7 @@ sendgrid==6.4.7
 six==1.14.0
 sqlparse==0.4.1
 starkbank-ecdsa==1.1.0
-urllib3==1.25.10
+urllib3==1.26.5
 whitenoise==5.2.0
 wincertstore==0.2
 wrapt==1.11.2
