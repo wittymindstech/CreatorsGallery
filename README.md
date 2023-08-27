@@ -14,7 +14,7 @@ Object Photo, Video Gallery & amp; Free Downloads
 
 ![](pixzium.png)
 
-# Contribute to our developer community.It will be enhance us to develop more authencated version.
+# Contribute to our developer community.It will help us to develop more authencated version.
 <form><script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_Gmqfrpfxzt1Eb0" async> </script> </form>
 
 
