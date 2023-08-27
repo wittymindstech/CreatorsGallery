@@ -1,5 +1,5 @@
 # CreatorsGallery
-Object Photo & Video Gallery &amp; Free Downloads
+Object Photo, Video Gallery & amp; Free Downloads
 
 ![](wtpixel_image.png)
 
